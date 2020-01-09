@@ -14,36 +14,38 @@ import utils.*;
 public class Penjualan {
     
     // atribut Penjualan
-    Integer idBarang, idPegawai, banyakBarang;
-    String kodeTransaksi;
+    public Integer idBarang, idPegawai, banyakBarang;
+    public String kodeTransaksi;
     
     // constructor
     public Penjualan(){
         
     }
     
-    // insert data penjualan
+    // insert data buku
     public void insert(connection m, String kode, Integer barang, Integer pegawai, Integer banyak){
-        // koneksi mysql
+        // lakukan koneksi ke mysql
         Connection koneksi = m.conn;
         
-        // query mysql
-        String sql = "INSERT INTO penjualan (kode_transaksi, id_barang, id_pegawai, banyak_barang)";
-        
+        // query sql untuk insert data buku
+        String sql = "INSERT INTO penjualan (kode_transaksi, id_barang, id_pegawai, banyak_barang) VALUES (?, ?, ?, ?)";
+ 
         try {
             PreparedStatement statement = koneksi.prepareStatement(sql);
-            // mapping nilai
+            
+            // mapping nilai parameter dari query sql nya (sesuai urutan)
             statement.setString(1, kode);
             statement.setString(2, barang.toString());
             statement.setString(3, pegawai.toString());
             statement.setString(4, banyak.toString());
-            
-            // jalankan query
+
+            // jalankan query (baca jumlah row affectednya)
             int rowsInserted = statement.executeUpdate();
-            // jika rows affected maka insert sukses
-            if (rowsInserted > 0){
+            // jika ada row affected nya, maka status sukses
+            if (rowsInserted > 0) {
                 System.out.println("Insert data penjualan sukses");
-            } 
+            }
+
         } catch (SQLException ex) {
             // jika query gagal
             System.out.println("Insert data penjualan gagal");

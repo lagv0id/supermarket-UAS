@@ -26,7 +26,7 @@ public class Pegawai {
         Connection koneksi = m.conn;
         
         // query mysql
-        String sql = "INSERT INTO pegawai (id_pegawai, username, password, nama_pegawai)";
+        String sql = "INSERT INTO pegawai (id_pegawai, username, password, nama_pegawai) VALUES (?, ?, ?, ?)";
         
         try {
             PreparedStatement statement = koneksi.prepareStatement(sql);

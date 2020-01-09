@@ -15,8 +15,8 @@ import utils.*;
 public class Pembayaran {
     
     // atribut Pembayaran
-    Integer idPembayaran, statusPembayaran, jumlahBayar, kembalian;
-    String kodeTransaksi, tanggalPembayaran;
+    public Integer idPembayaran, statusPembayaran, jumlahBayar, kembalian;
+    public String kodeTransaksi, tanggalPembayaran;
     
     // constructor
     public Pembayaran(){
@@ -29,7 +29,7 @@ public class Pembayaran {
         Connection koneksi = m.conn;
         
         // query mysql
-        String sql = "INSERT INTO pembayaran (id_pembayaran, kode_transaksi, status_pembayaran, tanggal_pembayaran, jumlah_bayar, kembalian)";
+        String sql = "INSERT INTO `pembayaran` (`id_pembayaran`, `kode_transaksi`, `status_pembayaran`, `tanggal_pembayaran`, `jumlah_bayar`, `kembalian`) VALUES (?, ?, ?, ?, ?, ?)";
         
         try {
             PreparedStatement statement = koneksi.prepareStatement(sql);
@@ -52,6 +52,37 @@ public class Pembayaran {
             System.out.println("Insert data pembayaran gagal");
         }
     }
+    
+    /*
+    public void insert(connection m, String kode, Integer status, String tanggal, Integer jumlah, Integer kembali){
+        // lakukan koneksi ke mysql
+        Connection koneksi = m.conn;
+        
+        // query sql untuk insert data buku
+        String sql = "INSERT INTO pembayaran (kode_transaksi, status_pembayaran, tanggal_pembayaran, jumlah_bayar, kembalian) VALUES (?, ?, ?, ?, ?)";
+ 
+        try {
+            PreparedStatement statement = koneksi.prepareStatement(sql);
+            
+            // mapping nilai parameter dari query sql nya (sesuai urutan)
+            statement.setString(1, title);
+            statement.setString(2, author);
+            statement.setString(3, publisher);
+            statement.setString(4, year.toString());
+
+            // jalankan query (baca jumlah row affectednya)
+            int rowsInserted = statement.executeUpdate();
+            // jika ada row affected nya, maka status sukses
+            if (rowsInserted > 0) {
+                System.out.println("Insert data buku sukses");
+            }
+
+        } catch (SQLException ex) {
+            // jika query gagal
+            System.out.println("Insert data buku gagal");
+        }
+    } */
+    
     
     // delete data pembayaran berdasarkan idPembayaran
     public void delete(connection m, Integer id){
