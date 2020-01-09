@@ -63,7 +63,7 @@ public class CPenjualan {
             statement = koneksi.prepareStatement(sql);
             
             // mapping nilai 
-            statement.setString(1, kode);
+            statement.setInt(1, id);
             
             // jalankan query dan lihat row affected
             int rowsDeleted = statement.executeUpdate();
