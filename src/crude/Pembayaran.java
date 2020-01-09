@@ -115,17 +115,17 @@ public class Pembayaran {
         Connection koneksi = m.conn;
         
         //query mysql
-        String sql = "UPDATE pembayaran SET id_pembayaran=?, kode_transaksi=?, status_pembayaran=?, tanggal_pembayaran=?, jumlah_bayar=?, kembalian=?";
+        String sql = "UPDATE pembayaran SET kode_transaksi=?, status_pembayaran=?, tanggal_pembayaran=?, jumlah_bayar=?, kembalian=? WHERE id_pembayaran=?";
         
         try {
             PreparedStatement statement = koneksi.prepareStatement(sql);
             // mapping nilai 
-            statement.setString(1, id.toString());
-            statement.setString(2, kode);
-            statement.setString(3, status.toString());
-            statement.setString(4, tanggal);
-            statement.setString(5, jumlah.toString());
-            statement.setString(6, kembali.toString());
+            statement.setString(1, kode);
+            statement.setString(2, status.toString());
+            statement.setString(3, tanggal);
+            statement.setString(4, jumlah.toString());
+            statement.setString(5, kembali.toString());
+            statement.setString(6, id.toString());
 
             // jalankan query dan lihat row affected
             int rowsUpdated = statement.executeUpdate();

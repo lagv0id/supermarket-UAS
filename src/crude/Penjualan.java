@@ -83,15 +83,15 @@ public class Penjualan {
         Connection koneksi = m.conn;
         
         //query mysql
-        String sql = "UPDATE penjualan SET kode_transaksi=?, id_barang=?, id_pegawai=?, banyak_barang=?";
+        String sql = "UPDATE penjualan SET id_barang=?, id_pegawai=?, banyak_barang=? WHERE kode_transaksi=?";
         
         try {
             PreparedStatement statement = koneksi.prepareStatement(sql);
             // mapping nilai 
-            statement.setString(1, kode);
-            statement.setString(2, barang.toString());
-            statement.setString(3, pegawai.toString());
-            statement.setString(4, banyak.toString());
+            statement.setString(1, barang.toString());
+            statement.setString(2, pegawai.toString());
+            statement.setString(3, banyak.toString());
+            statement.setString(4, kode);
 
             // jalankan query dan lihat row affected
             int rowsUpdated = statement.executeUpdate();
