@@ -81,7 +81,9 @@ public class Penjualan extends Supermarket {
                 pen.select(getConnection(), "kode_transaksi", getKodeTransaksi());
                 System.out.print("[$] Masukkan ID : ");
                 pen.delete(getConnection(), inp.nextInt());
-                
+            }
+            else if (pilih == 4){
+//                Pembayaran pem = new Pembayaran();
             }
         }
     }
