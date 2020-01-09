@@ -12,7 +12,12 @@ import utils.*;
  */
 public class MainClass {
     public static void main(String args[]){
-        Generator generate = new Generator();
-        System.out.println(generate.kode_transaksi());
+        Login m = new Login();
+        m.start();
+        Pegawai p = new Pegawai(m.getPegawai());
+        p.start();
+//        Generator g = new Generator();
+//        System.out.println(g.kode_transaksi());
+//        m.go("cycyn", "1");
     }
 }
