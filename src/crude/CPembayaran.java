@@ -24,9 +24,9 @@ public class CPembayaran {
     }
     
     // insert data pembayaran
-    public void insert(connection m, Integer id, String kode, Integer status, String tanggal, Integer jumlah, Integer kembali){
+    public void insert(Connection m, Integer id, String kode, Integer status, String tanggal, Integer jumlah, Integer kembali){
         // koneksi mysql
-        Connection koneksi = m.conn;
+        Connection koneksi = m;
         
         // query mysql
         String sql = "INSERT INTO pembayaran (id_pembayaran, kode_transaksi, status_pembayaran, tanggal_pembayaran, jumlah_bayar, kembalian)";
@@ -54,9 +54,9 @@ public class CPembayaran {
     }
     
     // delete data pembayaran berdasarkan idPembayaran
-    public void delete(connection m, Integer id){
+    public void delete(Connection m, Integer id){
         // koneksi mysql
-        Connection koneksi = m.conn;
+        Connection koneksi = m;
         
         // query mysql
         String sql = "DELETE FROM pembayaran WHERE id_pembayaran=?";
@@ -79,9 +79,9 @@ public class CPembayaran {
     }
     
     // update data pembayaran berdasarkan idPembayaran
-    public void update(connection m, Integer id, String kode, Integer status, String tanggal, Integer jumlah, Integer kembali){
+    public void update(Connection m, Integer id, String kode, Integer status, String tanggal, Integer jumlah, Integer kembali){
         // koneksi mysql
-        Connection koneksi = m.conn;
+        Connection koneksi = m;
         
         //query mysql
         String sql = "UPDATE pembayaran SET id_pembayaran=?, kode_transaksi=?, status_pembayaran=?, tanggal_pembayaran=?, jumlah_bayar=?, kembalian=?";
@@ -107,9 +107,9 @@ public class CPembayaran {
     }
     
     // select semua data pembayaran
-    public void select(connection m){
+    public void select(Connection m){
         // koneksi mysql
-        Connection koneksi = m.conn;
+        Connection koneksi = m;
         
         // query sql
         String sql = "SELECT * FROM pembayaran";
