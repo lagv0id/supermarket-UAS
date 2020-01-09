@@ -4,24 +4,30 @@
  * and open the template in the editor.
  */
 package main;
-import java.sql.*;
-import utils.*;
 
+import crude.CPembayaran;
+import crude.CPenjualan;
 
 /**
  *
  * @author Cynthia
  */
-public class Pembayaran extends Penjualan {
-    public Pembayaran(int idp){
+public class History extends Pegawai {
+    
+    public History(int idp) {
         super(idp);
     }
     
     public void banner(){
         System.out.println("=================================================");
         System.out.println("|               Supermarket Panel               |");
-        System.out.println("|             Pegawai - Pembayaran              |");
+        System.out.println("|         Pegawai - History Penjualan           |");
         System.out.println("=================================================");
+    }
+    public void start(){
+        banner();
+        CPembayaran pem = new CPembayaran();
+        pem.select(getConnection(), getPegawai());
     }
     
 }

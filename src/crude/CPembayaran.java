@@ -145,5 +145,42 @@ public class CPembayaran {
             System.out.println("Tampil data pembayaran gagal");
         }
     }
-    
+    public void select(Connection m, int idp){
+        // koneksi mysql
+        Connection koneksi = m;
+        // query sql
+        String pgw = String.valueOf(idp);
+        String sql = "SELECT * FROM pembayaran WHERE id_pegawai=" + pgw;
+
+         try {
+            Statement statement = koneksi.createStatement();
+            // jalankan query
+            ResultSet result = statement.executeQuery(sql);
+
+            // membuat header table untuk output
+            System.out.println("==============================================================================");
+            String header = "%3s %20s %20s %20s %20s %20s";
+            System.out.println(String.format(header, "ID", "KODE", "STATUS", "TANGGAL", "JUMLAH", "KEMBALIAN"));
+            System.out.println("------------------------------------------------------------------------------");
+            
+            // looping untuk baca data per record
+            while (result.next()){
+                // baca data buku per record
+                String id = result.getString("id_pembayaran");
+                String kode = result.getString("kode_transaksi");
+                String status = result.getString("status_pembayaran");
+                String tanggal = result.getString("tanggal_pembayaran");
+                String jumlah = result.getString("jumlah_bayar");
+                String kembali = result.getString("kembalian");
+                // tampilkan data buku per record
+                String output = "%3s %20s %20s %20s %20s %4s";
+                System.out.println(String.format(output, id, kode, status, tanggal, jumlah, kembali));
+            }
+            
+            System.out.println("==============================================================================");
+            
+        } catch (SQLException ex){
+            System.out.println("Tampil history pembayaran gagal");
+        }
+    }
 }
