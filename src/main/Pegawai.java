@@ -24,16 +24,18 @@ public class Pegawai extends Supermarket {
     }
     public void start(){
         banner();
-        System.out.println("[1] Penjualan");
-        System.out.println("[2] Barang");
-        System.out.println("[3] History Penjualan");
-        System.out.println("[4] Logout");
-        System.out.print("[$] ");
-        Scanner inp = new Scanner(System.in);
-        int pilih = inp.nextInt();
-        if (pilih == 1){
-            Penjualan pen = new Penjualan(getPegawai());
-            pen.start();
+        while (true){
+            System.out.println("[1] Penjualan");
+            System.out.println("[2] Barang");
+            System.out.println("[3] History Penjualan");
+            System.out.println("[4] Logout");
+            System.out.print("[$] ");
+            Scanner inp = new Scanner(System.in);
+            int pilih = inp.nextInt();
+            if (pilih == 1){
+                Penjualan pen = new Penjualan(getPegawai());
+                pen.start();
+            }
         }
     }
     

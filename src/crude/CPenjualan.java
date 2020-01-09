@@ -138,6 +138,29 @@ public class CPenjualan {
             System.out.println("Tampil data penjualan gagal");
         }
     }
+    public boolean check(Connection m, String value){
+        // koneksi mysql
+        Connection koneksi = m;
+        
+        // query sql
+        String sql = "SELECT a.id_transaksi, b.nama_barang, c.nama_pegawai, a.banyak_barang FROM penjualan a JOIN barang b ON a.id_barang = b.id_barang JOIN pegawai c ON a.id_pegawai = c.id_pegawai WHERE a.kode_transaksi LIKE '%" + value + "%'";
+        boolean res = false;
+         try {
+            Statement statement = koneksi.createStatement();
+            // jalankan query
+            ResultSet result = statement.executeQuery(sql);
+            // looping untuk baca data per record
+            while (result.next()){
+                // baca data barang per record
+                res = true;
+                break;
+            }
+            
+        } catch (SQLException ex){
+            System.out.println("Kode Transaksi Tidak Ditemukan");
+        }
+        return res;
+    }
     public void select(Connection m, String where, String value){
         // koneksi mysql
         Connection koneksi = m;

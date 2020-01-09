@@ -32,25 +32,35 @@ public class Penjualan extends Supermarket {
     public void start(){
         banner();
         System.out.println("[1] Transaksi Yang Sudah Ada");
-        System.out.println("[1] Transaksi Baru");
+        System.out.println("[2] Transaksi Baru");
+        System.out.print("[$] ");
+        CPenjualan pen = new CPenjualan();
         Scanner inp = new Scanner(System.in);
+        boolean lanjut = false;
         if (inp.nextInt() == 1){
             inp.nextLine();
             System.out.print("[$] Kode : ");
-            setKodeTransaksi(inp.nextLine());
+            String kt = inp.nextLine();
+            if (pen.check(getConnection(), kt)){
+                lanjut = true;
+                setKodeTransaksi(kt);
+            }
+            else {
+                System.out.println("Kode Tidak Ditemukan");
+            }
+            
         }
         else {
             Generator generate = new Generator();
             setKodeTransaksi(generate.kode_transaksi());   
         }
-        while (true){
+        while (lanjut){
             System.out.println("[1] Lihat Barang");
             System.out.println("[2] Tambah Barang");
             System.out.println("[3] Hapus Barang");
             System.out.println("[4] Pembayaran");
             System.out.print("[$] ");
             int pilih = inp.nextInt();
-            CPenjualan pen = new CPenjualan();
             if (pilih == 1){
                 pen.select(getConnection(), "kode_transaksi", getKodeTransaksi());
             }
