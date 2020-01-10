@@ -104,7 +104,7 @@ public class CBarang {
         Connection koneksi = m;
         
         // query sql
-        String sql = "SELECT * FROM barang";
+        String sql = "SELECT * FROM barang WHERE stok_barang > 0";
 
          try {
             Statement statement = koneksi.createStatement();
@@ -140,7 +140,7 @@ public class CBarang {
         Connection koneksi = m;
         
         // query sql
-        String sql = "SELECT * FROM barang WHERE " + where + "=" + value;
+        String sql = "SELECT * FROM barang WHERE stok_barang > 0 AND" + where + "=" + value;
 
          try {
             Statement statement = koneksi.createStatement();

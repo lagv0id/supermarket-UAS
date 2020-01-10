@@ -26,6 +26,7 @@ public class Login extends Supermarket {
             ResultSet result = p.executeQuery();
             while (result.next()){
                 res = result.getInt("id_pegawai");
+                System.out.println(res);
                 break;
             }
         }

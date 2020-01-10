@@ -26,9 +26,10 @@ public class Pegawai extends Supermarket {
         banner();
         while (true){
             System.out.println("[1] Penjualan");
-            System.out.println("[2] Barang");
-            System.out.println("[3] History Penjualan");
-            System.out.println("[4] Logout");
+            System.out.println("[2] Kategori Barang");
+            System.out.println("[3] Barang");
+            System.out.println("[4] History Penjualan");
+            System.out.println("[5] Logout");
             System.out.print("[$] ");
             Scanner inp = new Scanner(System.in);
             int pilih = inp.nextInt();
@@ -37,11 +38,18 @@ public class Pegawai extends Supermarket {
                 pen.start();
             }
             else if (pilih == 2){
-                //barang
+                
             }
             else if (pilih == 3){
+                
+            }
+            else if (pilih == 4){
                 History h = new History(getPegawai());
                 h.start();
+            }
+            else {
+                System.out.println("Logout berhasil");
+                System.exit(0);
             }
         }
     }

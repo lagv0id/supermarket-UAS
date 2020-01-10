@@ -81,15 +81,15 @@ public class CPenjualan {
         Connection koneksi = m;
         
         //query mysql
-        String sql = "UPDATE penjualan SET kode_transaksi=?, id_barang=?, id_pegawai=?, banyak_barang=?";
+        String sql = "UPDATE penjualan SET id_barang=?, id_pegawai=?, banyak_barang=? WHERE kode_transaksi=?";
         
         try {
             PreparedStatement statement = koneksi.prepareStatement(sql);
             // mapping nilai 
-            statement.setString(1, kode);
-            statement.setString(2, barang.toString());
-            statement.setString(3, pegawai.toString());
-            statement.setString(4, banyak.toString());
+            statement.setString(1, barang.toString());
+            statement.setString(2, pegawai.toString());
+            statement.setString(3, banyak.toString());
+            statement.setString(4, kode);
 
             // jalankan query dan lihat row affected
             int rowsUpdated = statement.executeUpdate();
@@ -143,7 +143,7 @@ public class CPenjualan {
         Connection koneksi = m;
         
         // query sql
-        String sql = "SELECT a.id_transaksi, b.nama_barang, c.nama_pegawai, a.banyak_barang FROM penjualan a JOIN barang b ON a.id_barang = b.id_barang JOIN pegawai c ON a.id_pegawai = c.id_pegawai WHERE a.kode_transaksi LIKE '%" + value + "%'";
+        String sql = "SELECT a.id_transaksi, b.nama_barang, b.harga_barang, c.nama_pegawai, a.banyak_barang FROM penjualan a JOIN barang b ON a.id_barang = b.id_barang JOIN pegawai c ON a.id_pegawai = c.id_pegawai WHERE a.kode_transaksi LIKE '%" + value + "%'";
         boolean res = false;
          try {
             Statement statement = koneksi.createStatement();
@@ -161,12 +161,36 @@ public class CPenjualan {
         }
         return res;
     }
+    public int check(Connection m, String value, int barang){
+        // koneksi mysql
+        Connection koneksi = m;
+        
+        // query sql
+        String idb = String.valueOf(barang);
+        String sql = "SELECT a.id_transaksi, b.nama_barang, b.harga_barang, c.nama_pegawai, a.banyak_barang FROM penjualan a JOIN barang b ON a.id_barang = b.id_barang JOIN pegawai c ON a.id_pegawai = c.id_pegawai WHERE a.kode_transaksi LIKE '%" + value + "%' AND a.id_barang=" + idb;
+        int res = 0;
+         try {
+            Statement statement = koneksi.createStatement();
+            // jalankan query
+            ResultSet result = statement.executeQuery(sql);
+            // looping untuk baca data per record
+            while (result.next()){
+                // baca data barang per record
+                res = result.getInt("banyak_barang");
+                break;
+            }
+            
+        } catch (SQLException ex){
+            System.out.println("Kode Transaksi Tidak Ditemukan");
+        }
+        return res;
+    }
     public void select(Connection m, String where, String value){
         // koneksi mysql
         Connection koneksi = m;
         
         // query sql
-        String sql = "SELECT a.id_transaksi, b.nama_barang, c.nama_pegawai, a.banyak_barang FROM penjualan a JOIN barang b ON a.id_barang = b.id_barang JOIN pegawai c ON a.id_pegawai = c.id_pegawai WHERE " + where + " LIKE '%" + value + "%'";
+        String sql = "SELECT a.id_transaksi, b.nama_barang, b.harga_barang, c.nama_pegawai, a.banyak_barang FROM penjualan a JOIN barang b ON a.id_barang = b.id_barang JOIN pegawai c ON a.id_pegawai = c.id_pegawai WHERE " + where + " LIKE '%" + value + "%'";
 
          try {
             Statement statement = koneksi.createStatement();
@@ -175,8 +199,8 @@ public class CPenjualan {
 
             // membuat header table untuk output
             System.out.println("==============================================================================");
-            String header = "%4s %4s %20s %20s %16s";
-            System.out.println(String.format(header,"NO", "ID", "NAMA BARANG", "NAMA PEGAWAI", "BANYAK BARANG"));
+            String header = "%4s %4s %14s %14s %14s %14s";
+            System.out.println(String.format(header,"NO", "ID", "NAMA BARANG", "NAMA PEGAWAI", "BANYAK BARANG", "HARGA BARANG"));
             System.out.println("------------------------------------------------------------------------------");
             int no = 1;
             // looping untuk baca data per record
@@ -187,9 +211,10 @@ public class CPenjualan {
                 String barang = result.getString("nama_barang");
                 String pegawai = result.getString("nama_pegawai");
                 String banyak = result.getString("banyak_barang");
+                String harga = result.getString("harga_barang");
                 // tampilkan data barang per record
-                String output = "%4s %4s %20s %20s %16s";
-                System.out.println(String.format(output, nomor, id, barang, pegawai, banyak));
+                String output = "%4s %4s %20s %20s %8s %8s";
+                System.out.println(String.format(output, nomor, id, barang, pegawai, banyak, harga));
             }
             
             System.out.println("==============================================================================");
@@ -198,5 +223,29 @@ public class CPenjualan {
             System.out.println("Belum ada barang");
         }
     }
-    
+    public int checkout(Connection m, String where, String value){
+        // koneksi mysql
+        Connection koneksi = m;
+        
+        // query sql
+        String sql = "SELECT a.id_transaksi, b.nama_barang, b.harga_barang, c.nama_pegawai, a.banyak_barang FROM penjualan a JOIN barang b ON a.id_barang = b.id_barang JOIN pegawai c ON a.id_pegawai = c.id_pegawai WHERE " + where + " LIKE '%" + value + "%'";
+        int total = 0;
+         try {
+            Statement statement = koneksi.createStatement();
+            // jalankan query
+            ResultSet result = statement.executeQuery(sql);
+            // looping untuk baca data per record
+            while (result.next()){
+                int harga = result.getInt("harga_barang");
+                int jumlah = result.getInt("banyak_barang");
+                total += harga * jumlah;
+                // baca data barang per record
+                
+            }
+            
+        } catch (SQLException ex){
+            System.out.println("Belum ada barang");
+        }
+        return total;
+    }
 }

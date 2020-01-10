@@ -24,12 +24,12 @@ public class CPembayaran {
     }
     
     // insert data pembayaran
-    public void insert(Connection m, Integer id, String kode, Integer status, String tanggal, Integer jumlah, Integer kembali){
+    public void insert(Connection m, Integer id, String kode, Integer status, Date date, Integer jumlah, Integer kembali){
         // koneksi mysql
         Connection koneksi = m;
         
         // query mysql
-        String sql = "INSERT INTO pembayaran (id_pembayaran, kode_transaksi, status_pembayaran, tanggal_pembayaran, jumlah_bayar, kembalian)";
+        String sql = "INSERT INTO pembayaran (id_pegawai, kode_transaksi, status_pembayaran, tanggal_pembayaran, jumlah_bayar, kembalian) VALUES (?,?,?,?,?,?)";
         
         try {
             PreparedStatement statement = koneksi.prepareStatement(sql);
@@ -37,7 +37,7 @@ public class CPembayaran {
             statement.setString(1, id.toString());
             statement.setString(2, kode);
             statement.setString(3, status.toString());
-            statement.setString(4, tanggal);
+            statement.setDate(4, date);
             statement.setString(5, jumlah.toString());
             statement.setString(6, kembali.toString());
             
@@ -45,11 +45,11 @@ public class CPembayaran {
             int rowsInserted = statement.executeUpdate();
             // jika rows affected maka insert sukses
             if (rowsInserted > 0){
-                System.out.println("Insert data pembayaran sukses");
+                System.out.println("Pembayaran sukses");
             } 
         } catch (SQLException ex) {
             // jika query gagal
-            System.out.println("Insert data pembayaran gagal");
+            System.out.println("Pembayaran gagal");
         }
     }
     
@@ -79,7 +79,7 @@ public class CPembayaran {
     }
     
     // update data pembayaran berdasarkan idPembayaran
-    public void update(Connection m, Integer id, String kode, Integer status, String tanggal, Integer jumlah, Integer kembali){
+    public void update(Connection m, Integer id, String kode, int status, java.sql.Date tanggal, Integer jumlah, Integer kembali){
         // koneksi mysql
         Connection koneksi = m;
         
@@ -89,12 +89,12 @@ public class CPembayaran {
         try {
             PreparedStatement statement = koneksi.prepareStatement(sql);
             // mapping nilai 
-            statement.setString(1, id.toString());
+            statement.setInt(1, id);
             statement.setString(2, kode);
-            statement.setString(3, status.toString());
-            statement.setString(4, tanggal);
-            statement.setString(5, jumlah.toString());
-            statement.setString(6, kembali.toString());
+            statement.setInt(3, status);
+            statement.setDate(4, tanggal);
+            statement.setInt(5, jumlah);
+            statement.setInt(6, kembali);
 
             // jalankan query dan lihat row affected
             int rowsUpdated = statement.executeUpdate();
@@ -159,7 +159,7 @@ public class CPembayaran {
 
             // membuat header table untuk output
             System.out.println("==============================================================================");
-            String header = "%3s %20s %20s %20s %20s %20s";
+            String header = "%3s %20s %6s %20s %20s %4s";
             System.out.println(String.format(header, "ID", "KODE", "STATUS", "TANGGAL", "JUMLAH", "KEMBALIAN"));
             System.out.println("------------------------------------------------------------------------------");
             
@@ -173,7 +173,7 @@ public class CPembayaran {
                 String jumlah = result.getString("jumlah_bayar");
                 String kembali = result.getString("kembalian");
                 // tampilkan data buku per record
-                String output = "%3s %20s %20s %20s %20s %4s";
+                String output = "%3s %20s %6s %20s %20s %4s";
                 System.out.println(String.format(output, id, kode, status, tanggal, jumlah, kembali));
             }
             

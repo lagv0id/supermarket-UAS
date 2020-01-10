@@ -48,7 +48,7 @@ public class Penjualan extends Supermarket {
             else {
                 System.out.println("Kode Tidak Ditemukan");
             }
-            
+        
         }
         else {
             Generator generate = new Generator();
@@ -75,7 +75,13 @@ public class Penjualan extends Supermarket {
                 int id_barang = inp.nextInt();
                 System.out.print("[$] Jumlah Barang : ");
                 int jumlah = inp.nextInt();
-                pen.insert(getConnection(), kode_transaksi, id_barang, getPegawai(), jumlah);
+                int cek = pen.check(getConnection(), getKodeTransaksi(), id_barang);
+                if (cek > 0){
+                    pen.update(getConnection(), getKodeTransaksi(), id_barang, getPegawai(), jumlah+cek);
+                }
+                else {
+                    pen.insert(getConnection(), kode_transaksi, id_barang, getPegawai(), jumlah);
+                }
             }
             else if (pilih == 3){
                 pen.select(getConnection(), "kode_transaksi", getKodeTransaksi());
@@ -83,7 +89,8 @@ public class Penjualan extends Supermarket {
                 pen.delete(getConnection(), inp.nextInt());
             }
             else if (pilih == 4){
-//                Pembayaran pem = new Pembayaran();
+                Pembayaran pem = new Pembayaran(getPegawai(), getKodeTransaksi());
+                pem.start();
             }
         }
     }

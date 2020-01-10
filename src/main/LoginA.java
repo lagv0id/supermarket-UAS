@@ -15,14 +15,14 @@ public class LoginA extends Login {
     public int go(String username, String password){
         Connection c = getConnection();
         int res = 0;
-        String q = "SELECT 1 FROM admin WHERE username = ? AND password = ?";
+        String q = "SELECT 31337 FROM admin WHERE username = ? AND password = ?";
         try {
             PreparedStatement p = c.prepareStatement(q);
             p.setString(1, username);
             p.setString(2, password);
             ResultSet result = p.executeQuery();
             while (result.next()){
-                res = 1;
+                res = 31337;
                 break;
             }
         }

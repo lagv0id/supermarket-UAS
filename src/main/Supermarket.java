@@ -31,6 +31,12 @@ public abstract class Supermarket implements sp {
     public void setPegawai(int p){
         id_pegawai = p;
     }
+    public void setAdmin(int p){
+        admin = 1;
+    }
+    public int getAdmin(){
+        return admin;
+    }
     public int getPegawai(){
         return id_pegawai;
     }
@@ -58,6 +64,10 @@ public abstract class Supermarket implements sp {
                 setPegawai(la.go(user, pass));
                 System.out.println("Login Success");
             }
+            else {
+                System.out.println("Login Failed");
+                System.exit(0);
+            }
         }
         else {
             System.out.print("Username : ");
@@ -69,6 +79,10 @@ public abstract class Supermarket implements sp {
                 setLogin(1);
                 setPegawai(lp.go(user, pass));
                 System.out.println("Login Success");
+            }
+            else {
+                System.out.println("Login Failed");
+                System.exit(0);
             }
         }
     }

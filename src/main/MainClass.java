@@ -14,8 +14,17 @@ public class MainClass {
     public static void main(String args[]){
         Login m = new Login();
         m.start();
-        Pegawai p = new Pegawai(m.getPegawai());
-        p.start();
+        if (m.getPegawai() == 31337){
+            m.setAdmin(1);
+            m.setPegawai(0);
+            Admin am = new Admin(m.getAdmin());
+            am.start();
+        }
+        else {
+            Pegawai p = new Pegawai(m.getPegawai());
+            p.start();
+        }
+        
 //        Generator g = new Generator();
 //        System.out.println(g.kode_transaksi());
 //        m.go("cycyn", "1");

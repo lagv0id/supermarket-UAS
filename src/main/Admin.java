@@ -25,14 +25,22 @@ public class Admin extends Supermarket {
         banner();
         while (true){
             System.out.println("[1] Pegawai");
-            System.out.println("[2] Barang");
-            System.out.println("[3] History Penjualan");
-            System.out.println("[4] Logout");
+            System.out.println("[2] Kategori Barang");
+            System.out.println("[3] Barang");
+            System.out.println("[4] History Penjualan");
+            System.out.println("[5] Logout");
             System.out.print("[$] ");
             Scanner inp = new Scanner(System.in);
             int pilih = inp.nextInt();
             if (pilih == 1){
                 //manggil bt pegawai
+            }
+            else if (pilih == 2){
+                Kategori k = new Kategori(getAdmin());
+                k.start();
+            }
+            else if (pilih == 3){
+                
             }
         }
     }

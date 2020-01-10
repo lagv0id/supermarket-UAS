@@ -24,82 +24,77 @@ public class CKategori {
     public CKategori(){
     }
     
-    // insert data barang
-    public void insert(Connection m, Integer idBarang, Integer idKategori, String namaBarang, Integer hargaBarang, Integer stokBarang){
+
+    public void insert(Connection m,String nama){
         // koneksi mysql
         Connection koneksi = m;
         
         // query mysql
-        String sql = "INSERT INTO barang (id_barang, id_kategori, nama_barang, harga_barang, stok_barang) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO kategori_barang(nama_kategori) VALUES (?)";
         
         try {
             PreparedStatement statement = koneksi.prepareStatement(sql);
             // mapping nilai
-            statement.setString(1, idBarang.toString());
-            statement.setString(2, namaBarang);
-            statement.setString(3, hargaBarang.toString());
-            statement.setString(4, stokBarang.toString());
+            statement.setString(1, nama);
             
             // jalankan query
             int rowsInserted = statement.executeUpdate();
             // jika rows affected maka insert sukses
             if (rowsInserted > 0){
-                System.out.println("Insert data barang sukses");
+                System.out.println("Insert data kategori sukses");
             }
         } catch (SQLException ex) {
             // jika query gagal
-            System.out.println("Insert data barang gagal");
+            System.out.println("Insert data kategori gagal");
         }
     }
     
     // delete data barang berdasarkan idBarang
-    public void delete(Connection m, Integer idBarang){
+    public void delete(Connection m, Integer idKat){
         // koneksi mysql
         Connection koneksi = m;
         
         // query mysql
-        String sql = "DELETE FROM barang WHERE id_barang=?";
+        String sql = "DELETE FROM kategori_barang WHERE id_kategori=?";
         
         try {
             PreparedStatement statement;
             statement = koneksi.prepareStatement(sql);
             
             // mapping nilai 
-            statement.setString(1, idBarang.toString());
+            statement.setString(1, idKat.toString());
             
             // jalankan query dan lihat row affected
             int rowsDeleted = statement.executeUpdate();
             if (rowsDeleted > 0) {
-                System.out.println("Barang sudah berhasil dihapus");
+                System.out.println("Kategori sudah berhasil dihapus");
             }
         } catch (SQLException ex) {
-            System.out.println("Hapus data barang gagal");
+            System.out.println("Hapus data kategori gagal");
         }
     }
     
     // update data barang berdasarkan idBarang
-    public void update(Connection m, Integer idBarang, String namaBarang, Integer hargaBarang, Integer stokBarang){
+    public void update(Connection m, Integer idKat, String nama){
         // koneksi mysql
         Connection koneksi = m;
         
         //query mysql
-        String sql = "UPDATE barang SET nama_barang=?, harga_barang=?, stok_barang=? WHERE id_barang=?";
+        String sql = "UPDATE kategori_barang SET nama_kategori=? WHERE id_kategori=?";
         
         try {
             PreparedStatement statement = koneksi.prepareStatement(sql);
             // mapping nilai 
-            statement.setString(1, idBarang.toString());
-            statement.setString(2, namaBarang);
-            statement.setString(3, hargaBarang.toString());
-            statement.setString(4, stokBarang.toString());
+            statement.setString(1, nama);
+            statement.setInt(2, idKat);
 
             // jalankan query dan lihat row affected
             int rowsUpdated = statement.executeUpdate();
             if (rowsUpdated > 0) {
-                System.out.println("Update data barang sukses");
+                System.out.println("Update data kategori sukses");
             }
         } catch (SQLException ex) {
-             System.out.println("Update data barang gagal");
+             System.out.println("Update data kategori gagal");
         }
     }
     
@@ -135,7 +130,7 @@ public class CKategori {
             System.out.println("==============================================================================");
             
         } catch (SQLException ex){
-            System.out.println("Tampil data barang gagal");
+            System.out.println("Tampil data kategori gagal");
         }
     }
     public void select(Connection m, String where, int value){
