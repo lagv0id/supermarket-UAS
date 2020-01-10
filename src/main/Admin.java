@@ -33,7 +33,8 @@ public class Admin extends Supermarket {
             Scanner inp = new Scanner(System.in);
             int pilih = inp.nextInt();
             if (pilih == 1){
-                //manggil bt pegawai
+                APegawai pe = new APegawai(getAdmin());
+                pe.start();
             }
             else if (pilih == 2){
                 Kategori k = new Kategori(getAdmin());

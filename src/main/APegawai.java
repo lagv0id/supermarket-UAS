@@ -44,8 +44,8 @@ public class APegawai extends Admin {
                     pe.select(getConnection());
                     System.out.print("Masukkan ID : ");
                     id = inp.nextInt();
-                    inp.nextLine();
                 }
+                inp.nextLine();
                 System.out.print("Nama Pegawai\t: ");
                 String nama = inp.nextLine();
                 System.out.print("Username\t: ");
