@@ -83,11 +83,11 @@ public class CPegawai {
         try {
             PreparedStatement statement = koneksi.prepareStatement(sql);
             // mapping nilai 
-            statement.setString(1, idPegawai.toString());
-            statement.setString(2, username);
-            statement.setString(3, password);
-            statement.setString(4, namaPegawai);
-
+            statement.setString(1, username);
+            statement.setString(2, password);
+            statement.setString(3, namaPegawai);
+            statement.setString(4, idPegawai.toString());
+            
             // jalankan query dan lihat row affected
             int rowsUpdated = statement.executeUpdate();
             if (rowsUpdated > 0) {

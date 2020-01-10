@@ -84,17 +84,18 @@ public class CPembayaran {
         Connection koneksi = m;
         
         //query mysql
-        String sql = "UPDATE pembayaran SET id_pembayaran=?, kode_transaksi=?, status_pembayaran=?, tanggal_pembayaran=?, jumlah_bayar=?, kembalian=?";
+        String sql = "UPDATE pembayaran SET kode_transaksi=?, status_pembayaran=?, tanggal_pembayaran=?, jumlah_bayar=?, kembalian=? WHERE id_pembayaran=?";
         
         try {
             PreparedStatement statement = koneksi.prepareStatement(sql);
             // mapping nilai 
-            statement.setInt(1, id);
-            statement.setString(2, kode);
-            statement.setInt(3, status);
-            statement.setDate(4, tanggal);
-            statement.setInt(5, jumlah);
-            statement.setInt(6, kembali);
+            
+            statement.setString(1, kode);
+            statement.setInt(2, status);
+            statement.setDate(3, tanggal);
+            statement.setInt(4, jumlah);
+            statement.setInt(5, kembali);
+            statement.setInt(6, id);
 
             // jalankan query dan lihat row affected
             int rowsUpdated = statement.executeUpdate();
