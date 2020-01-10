@@ -31,7 +31,7 @@ public class Kategori extends Admin{
             System.out.println("[1] Lihat Kategori");
             System.out.println("[2] Tambah Kategori");
             System.out.println("[3] Edit Kategori");
-            System.out.println("[4] Hapus Barang");
+            System.out.println("[4] Hapus Kategori");
             System.out.print("[$] ");
             CKategori k = new CKategori();
             Scanner inp = new Scanner(System.in);
@@ -57,6 +57,12 @@ public class Kategori extends Admin{
                 else {
                     k.insert(getConnection(), nama);
                 }
+            }
+            else if (p == 4){
+                k.select(getConnection());
+                System.out.print("Masukkan ID : ");
+                int id = inp.nextInt();
+                k.delete(getConnection(), id);
             }
         }
     }
