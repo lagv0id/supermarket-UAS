@@ -9,6 +9,15 @@ package main;
  *
  * @author Cynthia
  */
-public class BarangA {
+public class BarangA extends Barang {
     
+    public BarangA(int idp) {
+        super(idp);
+    }
+    public void banner(){
+        System.out.println("=================================================");
+        System.out.println("|              Supermarket  Panel               |");
+        System.out.println("|               Pegawai - Barang                |");
+        System.out.println("=================================================");
+    }
 }

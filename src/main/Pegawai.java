@@ -38,10 +38,12 @@ public class Pegawai extends Supermarket {
                 pen.start();
             }
             else if (pilih == 2){
-                
+                Kategori k = new Kategori(getPegawai());
+                k.start();
             }
             else if (pilih == 3){
-                
+                Barang b = new Barang(getPegawai());
+                b.start();
             }
             else if (pilih == 4){
                 History h = new History(getPegawai());

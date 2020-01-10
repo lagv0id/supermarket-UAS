@@ -22,7 +22,7 @@ public class Kategori extends Admin{
     public void banner(){
         System.out.println("=================================================");
         System.out.println("|              Supermarket  Panel               |");
-        System.out.println("|               Pegawai - Kategori              |");
+        System.out.println("|               Admin - Kategori                |");
         System.out.println("=================================================");
     }
     public void start(){

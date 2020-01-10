@@ -40,7 +40,16 @@ public class Admin extends Supermarket {
                 k.start();
             }
             else if (pilih == 3){
-                
+                Barang b = new Barang(getAdmin());
+                b.start();
+            }
+            else if (pilih == 4){
+                HistoryA h = new HistoryA(getAdmin());
+                h.start();
+            }
+            else {
+                System.out.println("Logout berhasil");
+                System.exit(0);
             }
         }
     }

@@ -9,6 +9,15 @@ package main;
  *
  * @author Cynthia
  */
-public class KategoriA {
-    
+public class KategoriA extends Kategori {
+
+    public KategoriA(int idp) {
+        super(idp);
+    }
+    public void banner(){
+        System.out.println("=================================================");
+        System.out.println("|              Supermarket  Panel               |");
+        System.out.println("|              Pegawai - Kategori               |");
+        System.out.println("=================================================");
+    }
 }

@@ -9,6 +9,15 @@ package main;
  *
  * @author Cynthia
  */
-public class APegawai {
+public class APegawai extends Admin {
+    public APegawai(int idp){
+        setAdmin(1);
+    }
+    public void banner(){
+        System.out.println("=================================================");
+        System.out.println("|              Supermarket  Panel               |");
+        System.out.println("|                Admin - Pegawai                |");
+        System.out.println("=================================================");
+    }
     
 }

@@ -20,20 +20,19 @@ public class CBarang {
     }
     
     // insert data barang
-    public void insert(Connection m, Integer idBarang, Integer idKategori, String namaBarang, Integer hargaBarang, Integer stokBarang){
+    public void insert(Connection m, Integer idKategori, String namaBarang, Integer hargaBarang, Integer stokBarang){
         // koneksi mysql
         Connection koneksi = m;
         
         // query mysql
-        String sql = "INSERT INTO barang (id_barang, id_kategori, nama_barang, harga_barang, stok_barang) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO barang (id_kategori, nama_barang, harga_barang, stok_barang) VALUES ( ?, ?, ?)";
         
         try {
             PreparedStatement statement = koneksi.prepareStatement(sql);
             // mapping nilai
-            statement.setString(1, idBarang.toString());
-            statement.setString(2, namaBarang);
-            statement.setString(3, hargaBarang.toString());
-            statement.setString(4, stokBarang.toString());
+            statement.setString(1, namaBarang);
+            statement.setInt(2, hargaBarang);
+            statement.setInt(3, stokBarang);
             
             // jalankan query
             int rowsInserted = statement.executeUpdate();
