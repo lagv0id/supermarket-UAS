@@ -21,20 +21,19 @@ public class CPegawai {
     }
     
     // insert data pegawai
-    public void insert(Connection m, Integer idPegawai, String username, String password, String namaPegawai){
+    public void insert(Connection m, String username, String password, String namaPegawai){
         // koneksi mysql
         Connection koneksi = m;
         
         // query mysql
-        String sql = "INSERT INTO pegawai (id_pegawai, username, password, nama_pegawai)";
+        String sql = "INSERT INTO pegawai (username, password, nama_pegawai)";
         
         try {
             PreparedStatement statement = koneksi.prepareStatement(sql);
             // mapping nilai
-            statement.setString(1, idPegawai.toString());
-            statement.setString(2, username);
-            statement.setString(3, password);
-            statement.setString(4, namaPegawai);
+            statement.setString(1, username);
+            statement.setString(2, password);
+            statement.setString(3, namaPegawai);
             
             // jalankan query
             int rowsInserted = statement.executeUpdate();

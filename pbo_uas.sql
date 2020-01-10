@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 09, 2020 at 11:36 PM
+-- Generation Time: Jan 10, 2020 at 02:55 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -35,6 +35,13 @@ CREATE TABLE `admin` (
   `password` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `nama`, `username`, `password`) VALUES
+(1, 'Administrator', 'admin', '1');
+
 -- --------------------------------------------------------
 
 --
@@ -54,7 +61,7 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`id_barang`, `id_kategori`, `nama_barang`, `harga_barang`, `stok_barang`) VALUES
-(1, 1, 'Buku', 5000, 7);
+(1, 1, 'Buku', 5000, 4);
 
 -- --------------------------------------------------------
 
@@ -72,7 +79,8 @@ CREATE TABLE `kategori_barang` (
 --
 
 INSERT INTO `kategori_barang` (`id_kategori`, `nama_kategori`) VALUES
-(1, 'Alat Tulis');
+(1, 'Alat Tulis'),
+(2, 'Obat');
 
 -- --------------------------------------------------------
 
@@ -102,12 +110,20 @@ INSERT INTO `pegawai` (`id_pegawai`, `username`, `password`, `nama_pegawai`) VAL
 
 CREATE TABLE `pembayaran` (
   `id_pembayaran` int(11) NOT NULL,
+  `id_pegawai` int(11) NOT NULL,
   `kode_transaksi` varchar(50) NOT NULL,
   `status_pembayaran` int(2) NOT NULL DEFAULT 0,
-  `tanggal_pembayaran` datetime DEFAULT NULL,
+  `tanggal_pembayaran` date DEFAULT NULL,
   `jumlah_bayar` int(20) DEFAULT NULL,
   `kembalian` int(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pembayaran`
+--
+
+INSERT INTO `pembayaran` (`id_pembayaran`, `id_pegawai`, `kode_transaksi`, `status_pembayaran`, `tanggal_pembayaran`, `jumlah_bayar`, `kembalian`) VALUES
+(1, 1, 'TSV201100001', 1, '2020-01-10', 5000, 0);
 
 -- --------------------------------------------------------
 
@@ -128,9 +144,6 @@ CREATE TABLE `penjualan` (
 --
 
 INSERT INTO `penjualan` (`id_transaksi`, `kode_transaksi`, `id_barang`, `id_pegawai`, `banyak_barang`) VALUES
-(1, 'TSV20190001', 1, 1, 10),
-(2, 'TSV20190002', 1, 1, 2),
-(3, 'TSV201100001', 1, 1, 2),
 (4, 'TSV201100001', 1, 1, 1);
 
 --
@@ -177,7 +190,8 @@ ALTER TABLE `pegawai`
 -- Indexes for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  ADD PRIMARY KEY (`id_pembayaran`);
+  ADD PRIMARY KEY (`id_pembayaran`),
+  ADD KEY `id_pegawai` (`id_pegawai`);
 
 --
 -- Indexes for table `penjualan`
@@ -196,7 +210,7 @@ ALTER TABLE `penjualan`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `barang`
@@ -208,7 +222,7 @@ ALTER TABLE `barang`
 -- AUTO_INCREMENT for table `kategori_barang`
 --
 ALTER TABLE `kategori_barang`
-  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `pegawai`
@@ -220,7 +234,7 @@ ALTER TABLE `pegawai`
 -- AUTO_INCREMENT for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `penjualan`

@@ -46,22 +46,17 @@ public class APegawai extends Admin {
                     id = inp.nextInt();
                     inp.nextLine();
                 }
-
-                CKategori k = new CKategori();
-                k.select(getConnection());
-                System.out.print("Masukkan Kode Barang : ");
-                int idk = inp.nextInt();
-                System.out.print("Nama Barang\t: ");
+                System.out.print("Nama Pegawai\t: ");
                 String nama = inp.nextLine();
-                System.out.print("Harga Barang\t: ");
-                int harga = inp.nextInt();
-                System.out.print("Stok Barang\t: ");
-                int stok = inp.nextInt();
+                System.out.print("Username\t: ");
+                String username = inp.nextLine();
+                System.out.print("Password\t: ");
+                String password = inp.nextLine();
                 if (p == 3){
-                    pe.update(getConnection(), id, nama, harga, stok);
+                    pe.update(getConnection(), id, username, password, nama);
                 }
                 else {
-                    pe.insert(getConnection(), idk, nama, harga, stok);
+                    pe.insert(getConnection(), username, password, nama);
                 }
             }
             else if(p == 4){
